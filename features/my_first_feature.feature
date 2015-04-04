@@ -3,5 +3,5 @@ Feature: My First Feature
   As a kitten
 
   Scenario:
-    When I yolo
-    Then I hear "meow"
+    When I run `echo meow`
+    Then the output should contain "meow"
