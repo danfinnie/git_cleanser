@@ -2,4 +2,4 @@
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'git_cleanser'
-puts "Hello from git_cleanser"
+GitCleanser::CLI.new(ARGV.dup).execute!
