@@ -8,7 +8,6 @@ Feature: Detecting compiled files
       compiled_files_command: echo "object.o"
       """
     And an empty file named "object.o"
-    And I successfully run `git init`
 
   Scenario:
     Given a file named ".gitignore" with:
