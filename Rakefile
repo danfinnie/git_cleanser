@@ -11,4 +11,4 @@ begin
 rescue LoadError
 end
 
-task default: ['cucumber', 'spec']
+task default: ['spec', 'cucumber']
