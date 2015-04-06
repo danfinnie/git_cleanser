@@ -1,23 +1,18 @@
 Feature: Detecting compiled files
   When a file is compiled but not git ignored, let the user know.
 
-  Background:
+  Scenario:
     Given a file named "git_cleanser.yml" with:
       """
       ---
-      compiled_files_command: echo "object.o"
+      compiled_files_command: echo ignored.o committed.o
       """
-    And an empty file named "object.o"
-
-  Scenario:
-    Given a file named ".gitignore" with:
+    And a file named ".gitignore" with:
       """
-      *.o
+      ignored.o
       """
+    And an empty file named "ignored.o"
+    And an empty file named "committed.o"
     When I run `git_cleanser`
-    Then its output for "generated_but_not_ignored" should not contain "object.o"
-
-  Scenario:
-    Given an empty file named ".gitignore"
-    When I run `git_cleanser`
-    Then its output for "generated_but_not_ignored" should contain "object.o"
+    Then its output for "generated_but_not_ignored" should contain "committed.o"
+    Then its output for "generated_but_not_ignored" should not contain "ignored.o"
