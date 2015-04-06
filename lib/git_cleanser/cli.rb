@@ -11,7 +11,7 @@ module GitCleanser
     def execute!
       compiled_files = sh(@config['compiled_files_command']).split
       ignored_and_untracked_files = sh("git ls-files -z --ignored --exclude-standard --other").split("\0")
-      print_array(compiled_files - ignored_and_untracked_files)
+      @stdout.puts YAML.dump("generated_but_not_ignored" => compiled_files - ignored_and_untracked_files)
     end
 
     private
@@ -22,14 +22,6 @@ module GitCleanser
           @stdout.puts Paint["Shell command failed: ", :red] + " " + cmd
           exit 1
         end
-      end
-    end
-
-    def print_array(ary)
-      if ary.empty?
-        @stdout.puts Paint["  (no files)", :green]
-      else
-        @stdout.puts ary.map { |x| "  #{x}"}.join("\n")
       end
     end
   end

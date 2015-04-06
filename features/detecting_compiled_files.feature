@@ -15,9 +15,9 @@ Feature: Detecting compiled files
       *.o
       """
     When I run `git_cleanser`
-    Then the output should not contain "object.o"
+    Then its output for "generated_but_not_ignored" should not contain "object.o"
 
   Scenario:
     Given an empty file named ".gitignore"
     When I run `git_cleanser`
-    Then the output should contain "object.o"
+    Then its output for "generated_but_not_ignored" should contain "object.o"
