@@ -7,7 +7,10 @@ module GitCleanser
 
     def execute!
       smart_thing = SmartThing.new(@config)
-      @stdout.puts YAML.dump("generated_but_not_ignored" => smart_thing.generated_but_not_ignored)
+      @stdout.puts YAML.dump(
+        "generated_but_not_ignored" => smart_thing.generated_but_not_ignored,
+        "ignored_but_not_generated" => smart_thing.ignored_but_not_generated
+      )
     end
   end
 end

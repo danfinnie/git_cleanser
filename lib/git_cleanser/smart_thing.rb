@@ -10,6 +10,10 @@ module GitCleanser
       @compiled_files - @ignored_and_untracked_files
     end
 
+    def ignored_but_not_generated
+      @ignored_and_untracked_files - @compiled_files
+    end
+
     private
 
     def sh(cmd)

@@ -5,14 +5,20 @@ Feature: Detecting compiled files
     Given a file named "git_cleanser.yml" with:
       """
       ---
-      compiled_files_command: echo ignored.o committed.o
+      compiled_files_command: echo ignored_and_generated.o committed.o
       """
     And a file named ".gitignore" with:
       """
-      ignored.o
+      ignored_and_generated.o
+      ignored_not_generated.o
       """
-    And an empty file named "ignored.o"
+    And an empty file named "ignored_and_generated.o"
+    And an empty file named "ignored_not_generated.o"
     And an empty file named "committed.o"
     When I run `git_cleanser`
     Then its output for "generated_but_not_ignored" should contain "committed.o"
-    Then its output for "generated_but_not_ignored" should not contain "ignored.o"
+    Then its output for "generated_but_not_ignored" should not contain "ignored_and_generated.o"
+    Then its output for "generated_but_not_ignored" should not contain "ignored_not_generated.o"
+    Then its output for "ignored_but_not_generated" should contain "ignored_not_generated.o"
+    Then its output for "ignored_but_not_generated" should not contain "ignored_and_generated.o"
+    Then its output for "ignored_but_not_generated" should not contain "committed.o"

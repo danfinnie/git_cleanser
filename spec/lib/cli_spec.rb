@@ -12,6 +12,7 @@ module GitCleanser
 
     it "prints output as YAML" do
       allow(smart_thing).to receive(:generated_but_not_ignored).and_return(["file1", "file2"])
+      allow(smart_thing).to receive(:ignored_but_not_generated).and_return(["file3", "file4"])
       allow(SmartThing).to receive(:new).and_return(smart_thing)
 
       subject.execute!
@@ -19,10 +20,12 @@ module GitCleanser
       stdout.rewind
       output = YAML.load(stdout.read)
       expect(output["generated_but_not_ignored"]).to eq ["file1", "file2"]
+      expect(output["ignored_but_not_generated"]).to eq ["file3", "file4"]
     end
 
     it "passes the config to the SmartThing" do
       allow(smart_thing).to receive(:generated_but_not_ignored)
+      allow(smart_thing).to receive(:ignored_but_not_generated)
       allow(SmartThing).to receive(:new).and_return(smart_thing)
 
       subject.execute!
