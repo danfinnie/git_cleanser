@@ -15,7 +15,7 @@ Feature: Detecting compiled files
     And an empty file named "ignored_and_generated.o"
     And an empty file named "ignored_not_generated.o"
     And an empty file named "committed.o"
-    When I run `git_cleanser`
+    When I run `git_cleanser --format=yaml`
     Then its output for "generated_but_not_ignored" should contain "committed.o"
     Then its output for "generated_but_not_ignored" should not contain "ignored_and_generated.o"
     Then its output for "generated_but_not_ignored" should not contain "ignored_not_generated.o"

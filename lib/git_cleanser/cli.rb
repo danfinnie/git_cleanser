@@ -1,3 +1,5 @@
+require 'slop'
+
 module GitCleanser
   class CLI
     def initialize(argv, stdin=STDIN, stdout=STDOUT, stderr=STDERR, kernel=Kernel, config_loader=ConfigLoader.new)
@@ -7,7 +9,19 @@ module GitCleanser
 
     def execute!
       smart_thing = SmartThing.new(@config)
-      @stdout.print Formatter::YAML.new.format(smart_thing)
+
+      opts = Slop.parse @argv do |o|
+        o.string '-f', '--format', 'output format'
+      end
+
+      formatter = case opts[:format]
+                    when 'yaml'
+                      Formatter::YAML
+                    else
+                      Formatter::Human
+                    end
+
+      @stdout.print formatter.new.format(smart_thing)
     end
   end
 end
