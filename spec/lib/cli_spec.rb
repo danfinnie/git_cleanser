@@ -8,19 +8,19 @@ module GitCleanser
     let(:config) { double("config") }
     let(:config_loader) { instance_double("ConfigLoader", config: config) }
     let(:smart_thing) { instance_double("SmartThing") }
+    let(:yaml_formatter) { instance_double("Formatter::YAML", format: "--- yaml") }
     subject { CLI.new([], stdin, stdout, stderr, Kernel, config_loader) }
 
     it "prints output as YAML" do
-      allow(smart_thing).to receive(:generated_but_not_ignored).and_return(["file1", "file2"])
-      allow(smart_thing).to receive(:ignored_but_not_generated).and_return(["file3", "file4"])
       allow(SmartThing).to receive(:new).and_return(smart_thing)
+      allow(Formatter::YAML).to receive(:new).and_return(yaml_formatter)
 
       subject.execute!
-
       stdout.rewind
-      output = YAML.load(stdout.read)
-      expect(output["generated_but_not_ignored"]).to eq ["file1", "file2"]
-      expect(output["ignored_but_not_generated"]).to eq ["file3", "file4"]
+      output = stdout.read
+
+      expect(output).to eq("--- yaml")
+      expect(yaml_formatter).to have_received(:format).with(smart_thing)
     end
 
     it "passes the config to the SmartThing" do
