@@ -5,7 +5,7 @@ module GitCleanser
 
       def format(smart_thing)
         output = KEYS.inject({}) { |memo, this| memo[this] = smart_thing.public_send(this); memo }
-        ::YAML.dump(output)
+        ::YAML.dump(output).strip
       end
     end
   end

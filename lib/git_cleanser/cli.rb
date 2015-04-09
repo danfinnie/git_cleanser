@@ -21,7 +21,7 @@ module GitCleanser
                       Formatter::Human
                     end
 
-      @stdout.print formatter.new.format(smart_thing)
+      @stdout.puts formatter.new.format(smart_thing)
     end
   end
 end

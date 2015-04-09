@@ -11,7 +11,7 @@ module GitCleanser
       def format(smart_thing)
         KEYS.map do |(key, message)|
           format_message(message) + "\n" + format_list(smart_thing.public_send(key))
-        end.join("\n\n") + "\n"
+        end.join("\n\n")
       end
 
       private

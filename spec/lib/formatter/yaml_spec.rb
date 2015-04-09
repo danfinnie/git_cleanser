@@ -3,16 +3,22 @@ module GitCleanser
     describe YAML do
       describe "#format" do
         let(:smart_thing) { instance_double("SmartThing") }
-        subject { YAML.new }
-        it "returns output as YAML" do
+        subject { YAML.new.format(smart_thing) }
+
+        before do
           allow(smart_thing).to receive(:generated_but_not_ignored).and_return(["file1", "file2"])
           allow(smart_thing).to receive(:ignored_but_not_generated).and_return(["file3", "file4"])
+        end
 
-          encoded_output = subject.format(smart_thing)
-          output = ::YAML.load(encoded_output)
+        it "returns output as YAML" do
+          output = ::YAML.load(subject)
 
           expect(output["generated_but_not_ignored"]).to eq ["file1", "file2"]
           expect(output["ignored_but_not_generated"]).to eq ["file3", "file4"]
+        end
+
+        it "removes trailing newlines because we add one in CLI" do
+          expect(subject).not_to end_with("\n")
         end
       end
     end

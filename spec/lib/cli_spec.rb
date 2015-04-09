@@ -27,7 +27,7 @@ module GitCleanser
           stdout.rewind
           output = stdout.read
 
-          expect(output).to eq("--- yaml")
+          expect(output).to eq("--- yaml\n")
           expect(formatter).to have_received(:format).with(smart_thing)
         end
       end
@@ -41,7 +41,7 @@ module GitCleanser
           stdout.rewind
           output = stdout.read
 
-          expect(output).to eq("Anglais")
+          expect(output).to eq("Anglais\n")
           expect(formatter).to have_received(:format).with(smart_thing)
         end
       end
