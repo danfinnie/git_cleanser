@@ -8,10 +8,10 @@ remove these files from your repository in the later case.
 
 ## Todo
 
-[ ] Add an option for human readable or YAML output
-[ ] Set up CI
-[ ] Put some examples in the README
-[ ] Check that things added to .gitignore are also `git rm`ed
+- [ ] Add an option for human readable or YAML output
+- [ ] Set up CI
+- [ ] Put some examples in the README
+- [ ] Check that things added to .gitignore are also `git rm`ed
 
 ## Installation
 
