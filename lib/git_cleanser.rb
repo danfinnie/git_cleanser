@@ -1,7 +1,6 @@
-require "git_cleanser/version"
-require "git_cleanser/smart_thing"
-require "git_cleanser/config_loader"
-require "git_cleanser/cli"
+Dir[File.join(__dir__, "**", "*.rb")].each do |file|
+  require file
+end
 
 module GitCleanser
 end
