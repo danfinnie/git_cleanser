@@ -1,6 +1,17 @@
 # GitCleanser
 
-TODO: Write a gem description
+It's not ideal, but we've all worked with repositories containing compiled
+files and their source code.  When there are 5 files and they follow a naming
+convention, it's easily fixable.  When there are 1,000 files and they are all
+named differently, fixing it seems insurmountable.  This tool helps iteratively
+remove these files from your repository in the later case.
+
+## Todo
+
+[ ] Add an option for human readable or YAML output
+[ ] Set up CI
+[ ] Put some examples in the README
+[ ] Check that things added to .gitignore are also `git rm`ed
 
 ## Installation
 
