@@ -11,7 +11,9 @@ remove these files from your repository in the later case.
 - [x] Add an option for human readable or YAML output
 - [ ] Set up CI
 - [ ] Put some examples in the README
-- [ ] Check that things added to .gitignore are also `git rm`ed
+- [x] Check that things added to .gitignore are also `git rm`ed
+- [ ] Add a filter for files so that you can specify *.css or *.js or what have you
+- [ ] Handle checked in library files
 
 ## Installation
 
