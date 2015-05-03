@@ -8,6 +8,7 @@ module GitCleanser
         before do
           allow(smart_thing).to receive(:generated_but_not_ignored).and_return(["file1", "file2"])
           allow(smart_thing).to receive(:ignored_but_not_generated).and_return(["file3", "file4"])
+          allow(smart_thing).to receive(:ignored_but_tracked).and_return(["file5", "file6"])
         end
 
         it "returns output as YAML" do
@@ -15,6 +16,7 @@ module GitCleanser
 
           expect(output["generated_but_not_ignored"]).to eq ["file1", "file2"]
           expect(output["ignored_but_not_generated"]).to eq ["file3", "file4"]
+          expect(output["ignored_but_tracked"]).to eq ["file5", "file6"]
         end
 
         it "removes trailing newlines because we add one in CLI" do

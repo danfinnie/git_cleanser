@@ -4,6 +4,7 @@ module GitCleanser
       @config = config
       @compiled_files = sh(@config['compiled_files_command']).split
       @ignored_and_untracked_files = sh("git ls-files -z --ignored --exclude-standard --other").split("\0")
+      @ignored_but_tracked_files = sh("git ls-files -z --ignored --exclude-standard").split("\0")
     end
 
     def generated_but_not_ignored
@@ -12,6 +13,10 @@ module GitCleanser
 
     def ignored_but_not_generated
       @ignored_and_untracked_files - @compiled_files
+    end
+
+    def ignored_but_tracked
+      @ignored_but_tracked_files
     end
 
     private

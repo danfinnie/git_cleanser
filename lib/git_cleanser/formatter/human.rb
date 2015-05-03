@@ -5,7 +5,8 @@ module GitCleanser
     class Human
       KEYS = {
         "generated_but_not_ignored" => "These files are compiled but not ignored (maybe they should be added to .gitignore?):",
-        "ignored_but_not_generated" => "These files are ignored, but not compiled (maybe they should be added to the compiled files list?):"
+        "ignored_but_not_generated" => "These files are ignored, but not compiled (maybe they should be added to the compiled files list?):",
+        "ignored_but_tracked" => "These files are ignored, but also tracked (maybe they should be removed from the repo or not ignored?):"
       }
 
       def format(smart_thing)

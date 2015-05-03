@@ -50,6 +50,7 @@ module GitCleanser
     it "passes the config to the SmartThing" do
       allow(smart_thing).to receive(:generated_but_not_ignored).and_return([])
       allow(smart_thing).to receive(:ignored_but_not_generated).and_return([])
+      allow(smart_thing).to receive(:ignored_but_tracked).and_return([])
       allow(SmartThing).to receive(:new).and_return(smart_thing)
 
       subject.execute!

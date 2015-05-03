@@ -15,3 +15,8 @@ Then(/^its output for "(.*?)" should contain "(.*?)"$/) do |key, value|
   output = YAML.load(unescape(all_output))
   expect(output[key]).to include(value)
 end
+
+Then(/^its output for "(.*?)" should be empty$/) do |key|
+  output = YAML.load(unescape(all_output))
+  expect(output[key]).to be_empty
+end
