@@ -15,6 +15,6 @@ Before do
   @dirs = [$tmp_dir]
 end
 
-After do
+After '~@no-clobber' do
   FileUtils.rm_r($tmp_dir, secure: true)
 end
