@@ -14,6 +14,7 @@ remove these files from your repository in the later case.
 - [x] Check that things added to .gitignore are also `git rm`ed
 - [ ] Add a filter for files so that you can specify *.css or *.js or what have you
 - [ ] Handle checked in library files
+- [ ] The exit code returns an error if any files are yet to be dealth with (for CI)
 
 ## Installation
 
