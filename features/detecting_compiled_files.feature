@@ -14,7 +14,7 @@ Feature: Detecting compiled files
       """
     And an empty file named "ignored_and_generated.o"
     And an empty file named "ignored_not_generated.o"
-    And an empty file named "committed.o"
+    And an empty, tracked file named "committed.o"
     When I run `git_cleanser --format=yaml`
     Then the exit status should be 0
 
