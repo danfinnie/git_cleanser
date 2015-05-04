@@ -7,7 +7,7 @@ module GitCleanser
     let(:stderr) { StringIO.new }
     let(:config) { double("config") }
     let(:config_loader) { instance_double("ConfigLoader", config: config) }
-    let(:smart_thing) { instance_double("SmartThing") }
+    let(:smart_thing) { instance_double("SmartThing").as_null_object }
     let(:formatter) { double("Formatter") }
     let(:argv) { [] }
     subject { CLI.new(argv, stdin, stdout, stderr, Kernel, config_loader) }
@@ -48,9 +48,6 @@ module GitCleanser
     end
 
     it "passes the config to the SmartThing" do
-      allow(smart_thing).to receive(:generated_but_not_ignored).and_return([])
-      allow(smart_thing).to receive(:ignored_but_not_generated).and_return([])
-      allow(smart_thing).to receive(:ignored_but_tracked).and_return([])
       allow(SmartThing).to receive(:new).and_return(smart_thing)
 
       subject.execute!
