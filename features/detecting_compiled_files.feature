@@ -16,9 +16,14 @@ Feature: Detecting compiled files
     And an empty file named "ignored_not_generated.o"
     And an empty file named "committed.o"
     When I run `git_cleanser --format=yaml`
-    Then its output for "generated_but_not_ignored" should contain "committed.o"
-    Then its output for "generated_but_not_ignored" should not contain "ignored_and_generated.o"
-    Then its output for "generated_but_not_ignored" should not contain "ignored_not_generated.o"
-    Then its output for "ignored_but_not_generated" should contain "ignored_not_generated.o"
-    Then its output for "ignored_but_not_generated" should not contain "ignored_and_generated.o"
-    Then its output for "ignored_but_not_generated" should not contain "committed.o"
+    Then the exit status should be 0
+
+    And its output for "generated_but_not_ignored" should contain "committed.o"
+    And its output for "generated_but_not_ignored" should not contain "ignored_and_generated.o"
+    And its output for "generated_but_not_ignored" should not contain "ignored_not_generated.o"
+
+    And its output for "ignored_but_not_generated" should contain "ignored_not_generated.o"
+    And its output for "ignored_but_not_generated" should not contain "ignored_and_generated.o"
+    And its output for "ignored_but_not_generated" should not contain "committed.o"
+
+    And its output for "ignored_but_tracked" should be empty
