@@ -1,11 +1,13 @@
+require 'set'
+
 module GitCleanser
   class SmartThing
     def initialize(config)
       @config = config
-      @compiled_files = sh(@config['compiled_files_command']).split
+      @compiled_files = sh(@config['compiled_files_command']).split.to_set
       @ignored_and_untracked_files = git_ls_files(:ignored, :other)
       @ignored_but_tracked_files = git_ls_files(:ignored)
-      @all_files = Dir['**/*']
+      @all_files = Dir['**/*'].to_set
     end
 
     def generated_but_not_ignored
@@ -28,7 +30,7 @@ module GitCleanser
 
     def git_ls_files *ruby_opts
       shell_opts = ruby_opts.map { |opt| "--#{opt}" }.join(" ")
-      sh("git ls-files -z --exclude-standard #{shell_opts}").split("\0")
+      sh("git ls-files -z --exclude-standard #{shell_opts}").split("\0").to_set
     end
 
     def sh(cmd)
